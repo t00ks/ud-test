@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <!-- ko with: viewModel -->
+        <!-- ko if: !$parent.isSubmitting() && !$parent.isSubmitted() && !$parent.errorOccurred() && !$parent.fatalErrorOccurred() -->
+        <h2>Enter Your Details</h2>
+        <form>
+            <div class="form-group" data-bind="css : { 'has-error' : displayError('email') }">
+                <label for="txtEmailAddress">Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="txtEmailAddress" placeholder="Enter your email address" data-bind="value: email"  />
+                <p class="help-block has-error" data-bind="visible: displayError('email')">please enter a valid email address</p>
+            </div>
+            <div class="form-group" data-bind="css : { 'has-error' : displayError('password') }">
+                <label for="txtPassword">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="txtPassword" placeholder="Enter your password" data-bind="value: password" />
+                <p class="help-block has-error" data-bind="visible: displayError('password')">please enter a valid password (must me more than 8 charactors)</p>
+                
+            </div>
+            <button type="submit" class="btn btn-primary" data-bind="enable: canSubmit, click: $parent.submit">
+                Submit
+            </button>
+        </form>
+        <!-- /ko -->
+        <!-- ko if: $parent.isSubmitting -->
+        <div class="text-center">
+            <p class="lead">Your Submission is being processed</p>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $parent.isSubmitted-->
+        <div class="text-center">
+            <p class="lead">Your Submission has completed Thank You
+            </p>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $parent.errorOccurred-->
+        <div class="text-center">
+            <p class="lead">Sorry an error occured during your registration, it is likely that the email address you have used is already taken
+            </p>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $parent.fatalErrorOccurred-->
+        <div class="text-center">
+            <p class="lead">Sorry a fatal error occured during your registration, the service could be down
+            </p>
+        </div>
+        <!-- /ko -->
+        
+        <!-- ko ifnot: $parent.isSubmitting -->
+        <br />
+        <div class="text-center">
+            <button type="button" class="btn btn-secondary" data-bind="click: $parent.clear">Start Again</button>
+        </div>
+        <!-- /ko -->
+        
+        <!-- /ko -->
+    </div>
+</div>
